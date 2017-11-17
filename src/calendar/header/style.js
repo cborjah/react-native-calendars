@@ -15,7 +15,8 @@ export default function(theme={}) {
       fontSize: 16,
       fontWeight: '300',
       color: appStyle.monthTextColor,
-      margin: 10
+      margin: 10,
+      fontFamily: "Gotham-Medium"
     },
     arrow: {
       padding: 10
@@ -41,7 +42,8 @@ export default function(theme={}) {
       width: 32,
       textAlign: 'center',
       fontSize: 12,
-      color: appStyle.textSectionTitleColor
+      color: appStyle.textSectionTitleColor,
+      fontFamily: "Gotham-Book"
     }
   });
 }

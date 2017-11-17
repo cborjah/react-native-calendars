@@ -14,7 +14,8 @@ export default function styleConstructor(theme={}) {
       fontSize: 16,
       fontWeight: '300',
       color: appStyle.dayTextColor,
-      backgroundColor: 'rgba(255, 255, 255, 0)'
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      fontFamily: "Gotham-Medium"
     },
     alignedText: {
       marginTop: Platform.OS === 'android' ? 4 : 6
