@@ -18,7 +18,8 @@ export default function(theme={}) {
       fontFamily: appStyle.textMonthFontFamily,
       fontWeight: '300',
       color: appStyle.monthTextColor,
-      margin: 10
+      margin: 10,
+      fontFamily: "Gotham-Medium"
     },
     arrow: {
       padding: 10
@@ -45,7 +46,8 @@ export default function(theme={}) {
       textAlign: 'center',
       fontSize: appStyle.textDayHeaderFontSize,
       fontFamily: appStyle.textDayHeaderFontFamily,
-      color: appStyle.textSectionTitleColor
+      color: appStyle.textSectionTitleColor,
+      fontFamily: "Gotham-Book"
     },
     ...(theme[STYLESHEET_ID] || {})
   });
