@@ -8,11 +8,16 @@ export default function styleConstructor(theme={}) {
   return StyleSheet.create({
     base: {
       flex: 1,
-      padding: 10,
       alignItems: 'center',
       borderColor: 'rgba(0, 0, 0, 0.5)',
       borderLeftWidth: 0.5,
       borderTopWidth: 0.5
+    },
+    button: {
+      alignSelf: "stretch",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 10
     },
     text: {
       marginTop: 4,

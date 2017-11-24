@@ -88,12 +88,14 @@ class Day extends Component {
 
     if (this.props.firstWeek) containerStyle.push(this.style.firstWeek);
     if (this.props.firstDay) containerStyle.push(this.style.firstDay);
-    
+
     return (
-      <TouchableOpacity style={containerStyle} onPress={this.onDayPress}>
-        <Text style={textStyle}>{String(this.props.children)}</Text>
-        {dot}
-      </TouchableOpacity>
+      <View style={containerStyle}>
+        <TouchableOpacity style={this.style.button} onPress={this.onDayPress}>
+          <Text style={textStyle}>{String(this.props.children)}</Text>
+          {dot}
+        </TouchableOpacity>
+      </View>
     );
   }
 }
