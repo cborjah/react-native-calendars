@@ -17,7 +17,9 @@ class Day extends Component {
     theme: PropTypes.object,
     marked: PropTypes.any,
     onPress: PropTypes.func,
-    day: PropTypes.object
+    day: PropTypes.object,
+    firstWeek: PropTypes.bool,
+    firstDay: PropTypes.bool
   };
 
   constructor(props) {
@@ -83,6 +85,10 @@ class Day extends Component {
     } else if (this.props.state === 'today') {
       textStyle.push(this.style.todayText);
     }
+
+    if (this.props.firstWeek) containerStyle.push(this.style.firstWeek);
+    if (this.props.firstDay) containerStyle.push(this.style.firstDay);
+    
     return (
       <TouchableOpacity style={containerStyle} onPress={this.onDayPress}>
         <Text style={textStyle}>{String(this.props.children)}</Text>

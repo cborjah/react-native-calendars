@@ -7,9 +7,12 @@ export default function styleConstructor(theme={}) {
   const appStyle = {...defaultStyle, ...theme};
   return StyleSheet.create({
     base: {
-      width: 32,
-      height: 32,
-      alignItems: 'center'
+      flex: 1,
+      padding: 10,
+      alignItems: 'center',
+      borderColor: 'rgba(0, 0, 0, 0.5)',
+      borderLeftWidth: 0.5,
+      borderTopWidth: 0.5
     },
     text: {
       marginTop: 4,
@@ -49,6 +52,12 @@ export default function styleConstructor(theme={}) {
     selectedDot: {
       backgroundColor: appStyle.selectedDotColor
     },
-    ...(theme[STYLESHEET_ID] || {})
+    ...(theme[STYLESHEET_ID] || {}),
+    firstWeek: {
+      borderTopWidth: 0
+    },
+    firstDay: {
+      borderLeftWidth: 0
+    }
   });
 }
