@@ -8,18 +8,21 @@ export default function(theme={}) {
   return StyleSheet.create({
     header: {
       flexDirection: 'row',
-      justifyContent: 'space-between',
+      justifyContent: 'center',
       paddingLeft: 10,
       paddingRight: 10,
-      alignItems: 'center'
+      alignItems: 'center',
+      marginTop: 7
     },
     monthText: {
+      height: appStyle.textMonthFontSize,
       fontSize: appStyle.textMonthFontSize,
       fontFamily: appStyle.textMonthFontFamily,
-      fontWeight: '300',
+      fontWeight: '600',
       color: appStyle.monthTextColor,
-      margin: 10,
-      fontFamily: "Gotham-Medium"
+      letterSpacing: -1,
+      marginVertical: 10,
+      marginHorizontal: 25
     },
     arrow: {
       padding: 10
@@ -46,8 +49,7 @@ export default function(theme={}) {
       textAlign: 'center',
       fontSize: appStyle.textDayHeaderFontSize,
       fontFamily: appStyle.textDayHeaderFontFamily,
-      color: appStyle.textSectionTitleColor,
-      fontFamily: "Gotham-Book"
+      color: appStyle.textSectionTitleColor
     },
     ...(theme[STYLESHEET_ID] || {})
   });
