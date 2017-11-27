@@ -9,9 +9,10 @@ export default function styleConstructor(theme={}) {
     base: {
       flex: 1,
       alignItems: 'center',
-      borderColor: 'rgba(0, 0, 0, 0.5)',
-      borderLeftWidth: 0.5,
-      borderTopWidth: 0.5
+      borderColor: 'rgb(217, 217, 217)',
+      borderWidth: 1,
+      borderRightColor: 'transparent',
+      borderBottomColor: 'transparent'
     },
     button: {
       alignSelf: "stretch",
@@ -23,7 +24,7 @@ export default function styleConstructor(theme={}) {
       marginTop: 4,
       fontSize: appStyle.textDayFontSize,
       fontFamily: appStyle.textDayFontFamily,
-      fontWeight: '300',
+      fontWeight: '400',
       color: appStyle.dayTextColor,
       backgroundColor: 'rgba(255, 255, 255, 0)'
     },
@@ -32,7 +33,6 @@ export default function styleConstructor(theme={}) {
     },
     selected: {
       backgroundColor: appStyle.selectedDayBackgroundColor,
-      borderRadius: 16
     },
     todayText: {
       color: appStyle.todayTextColor
@@ -59,10 +59,10 @@ export default function styleConstructor(theme={}) {
     },
     ...(theme[STYLESHEET_ID] || {}),
     firstWeek: {
-      borderTopWidth: 0
+      borderTopColor: 'transparent'
     },
     firstDay: {
-      borderLeftWidth: 0
+      borderLeftColor: 'transparent'
     }
   });
 }
