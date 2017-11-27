@@ -59,7 +59,7 @@ class CalendarHeader extends Component {
           {this.props.renderArrow
             ? this.props.renderArrow('left')
             : <Image
-                source={require('../img/previous.png')}
+                source={require('../img/leftArrow.png')}
                 style={this.style.arrowImage}
               />}
         </TouchableOpacity>
@@ -69,7 +69,7 @@ class CalendarHeader extends Component {
           {this.props.renderArrow
             ? this.props.renderArrow('right')
             : <Image
-                source={require('../img/next.png')}
+                source={require('../img/rightArrow.png')}
                 style={this.style.arrowImage}
               />}
         </TouchableOpacity>

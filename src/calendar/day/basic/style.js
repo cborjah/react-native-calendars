@@ -22,6 +22,7 @@ export default function styleConstructor(theme={}) {
     },
     text: {
       marginTop: 4,
+      marginLeft: 2,
       fontSize: appStyle.textDayFontSize,
       fontFamily: appStyle.textDayFontFamily,
       fontWeight: '400',
