@@ -198,7 +198,7 @@ class Calendar extends Component {
     const week = [];
     days.forEach((day, id2) => {
       let firstWeek = false;
-      let lastWeek = false;
+      let firstDay = false;
 
       if (id === 0) firstWeek = true;
       if (id2 === 0) firstDay = true;
@@ -209,7 +209,6 @@ class Calendar extends Component {
   }
 
   render() {
-    //console.log('render calendar ');
     const days = dateutils.page(this.state.currentMonth, this.props.firstDay);
     const weeks = [];
     while (days.length) {
