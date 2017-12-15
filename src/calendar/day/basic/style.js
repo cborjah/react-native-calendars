@@ -1,7 +1,8 @@
-import {StyleSheet, Platform} from 'react-native';
+import {StyleSheet, Platform, Dimensions} from 'react-native';
 import * as defaultStyle from '../../../style';
 
 const STYLESHEET_ID = 'stylesheet.day.basic';
+const { height, width } = Dimensions.get('window');
 
 export default function styleConstructor(theme={}) {
   const appStyle = {...defaultStyle, ...theme};
@@ -18,11 +19,11 @@ export default function styleConstructor(theme={}) {
       alignSelf: "stretch",
       alignItems: "center",
       justifyContent: "center",
-      padding: 10
+      padding: width * 0.026
     },
     text: {
-      marginTop: 4,
-      marginLeft: 2,
+      marginTop: height * 0.006,
+      marginLeft: width * 0.005,
       fontSize: appStyle.textDayFontSize,
       fontFamily: appStyle.textDayFontFamily,
       fontWeight: '400',

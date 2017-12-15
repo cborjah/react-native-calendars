@@ -1,7 +1,8 @@
-import {StyleSheet, Platform} from 'react-native';
+import {StyleSheet, Platform, Dimensions} from 'react-native';
 import * as defaultStyle from '../../style';
 
 const STYLESHEET_ID = 'stylesheet.calendar.header';
+const { height, width } = Dimensions.get('window');
 
 export default function(theme={}) {
   const appStyle = {...defaultStyle, ...theme};
@@ -15,13 +16,13 @@ export default function(theme={}) {
       marginTop: 7
     },
     monthText: {
-      height: appStyle.textMonthFontSize,
       fontSize: appStyle.textMonthFontSize,
       fontFamily: appStyle.textMonthFontFamily,
       fontWeight: '600',
       color: appStyle.monthTextColor,
       letterSpacing: -1,
-      marginVertical: 10,
+      marginBottom: height * 0.015,
+      marginTop: height * 0.023,
       marginHorizontal: 25
     },
     arrow: {
