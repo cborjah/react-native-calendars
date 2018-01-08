@@ -5,6 +5,7 @@ import {
   View
 } from 'react-native';
 import PropTypes from 'prop-types';
+import {Platform} from 'react-native';
 
 import styleConstructor from './style';
 
@@ -85,17 +86,17 @@ class Day extends Component {
     } else if (this.props.state === 'today') {
       textStyle.push(this.style.todayText);
     }
+    if (Platform.OS === 'android') textStyle.push(this.style.androidText);
+    else textStyle.push(this.style.iOSText);
 
     if (this.props.firstWeek) containerStyle.push(this.style.firstWeek);
     if (this.props.firstDay) containerStyle.push(this.style.firstDay);
 
     return (
-      <View style={containerStyle}>
-        <TouchableOpacity style={this.style.button} onPress={this.onDayPress}>
-          <Text style={textStyle}>{String(this.props.children)}</Text>
-          {dot}
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity style={containerStyle} onPress={this.onDayPress}>
+        <Text style={textStyle}>{String(this.props.children)}</Text>
+        {dot}
+      </TouchableOpacity>
     );
   }
 }

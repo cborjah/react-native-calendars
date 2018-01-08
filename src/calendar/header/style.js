@@ -10,10 +10,9 @@ export default function(theme={}) {
     header: {
       flexDirection: 'row',
       justifyContent: 'center',
-      paddingLeft: 10,
-      paddingRight: 10,
       alignItems: 'center',
-      marginTop: 7
+      marginTop: 8,
+      height: 45
     },
     monthText: {
       fontSize: appStyle.textMonthFontSize,
@@ -21,12 +20,12 @@ export default function(theme={}) {
       fontWeight: '600',
       color: appStyle.monthTextColor,
       letterSpacing: -1,
-      marginBottom: height * 0.015,
-      marginTop: height * 0.023,
-      marginHorizontal: 25
+      height: appStyle.textMonthFontSize
     },
     arrow: {
-      padding: 10
+      justifyContent: 'center',
+      paddingHorizontal: 35,
+      alignSelf: 'stretch'
     },
     arrowImage: {
       ...Platform.select({
@@ -39,18 +38,18 @@ export default function(theme={}) {
       })
     },
     week: {
-      marginVertical: 7,
+      marginTop: 10,
+      marginBottom: 15,
       flexDirection: 'row',
       justifyContent: 'space-around'
     },
     dayHeader: {
-      marginTop: 2,
-      marginBottom: 7,
       width: 32,
       textAlign: 'center',
       fontSize: appStyle.textDayHeaderFontSize,
       fontFamily: appStyle.textDayHeaderFontFamily,
-      color: appStyle.textSectionTitleColor
+      color: appStyle.textSectionTitleColor,
+      height: appStyle.textDayHeaderFontSize,
     },
     ...(theme[STYLESHEET_ID] || {})
   });

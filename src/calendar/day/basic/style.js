@@ -13,17 +13,19 @@ export default function styleConstructor(theme={}) {
       borderColor: 'rgb(217, 217, 217)',
       borderWidth: 1,
       borderRightColor: 'transparent',
-      borderBottomColor: 'transparent'
+      borderBottomColor: 'transparent',
+      paddingBottom: (width / 14) - appStyle.textDayFontSize,
+      paddingTop: (width / 14) - appStyle.textDayFontSize
     },
-    button: {
-      alignSelf: "stretch",
-      alignItems: "center",
-      justifyContent: "center",
-      padding: width * 0.026
+    iOSText: {
+      marginTop: height * 0.006,
+      marginLeft: width * 0.005
+    },
+    androidText: {
+      marginVertical: 1,
+      marginLeft: 1
     },
     text: {
-      marginTop: height * 0.006,
-      marginLeft: width * 0.005,
       fontSize: appStyle.textDayFontSize,
       fontFamily: appStyle.textDayFontFamily,
       fontWeight: '400',
