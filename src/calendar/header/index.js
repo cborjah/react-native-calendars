@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ActivityIndicator } from 'react-native';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Platform } from 'react-native';
 import XDate from 'xdate';
 import PropTypes from 'prop-types';
 import styleConstructor from './style';
@@ -47,6 +47,7 @@ class CalendarHeader extends Component {
   }
 
   render() {
+    const monthTextStyle = [this.style.monthText];
     let leftArrow = <View />;
     let rightArrow = <View />;
     let weekDaysNames = weekDayNames(this.props.firstDay);
@@ -79,12 +80,13 @@ class CalendarHeader extends Component {
     if (this.props.showIndicator) {
       indicator = <ActivityIndicator />;
     }
+    if (Platform.OS === 'ios') monthTextStyle.push(this.style.iOSMonthText);
     return (
       <View>
         <View style={this.style.header}>
           {leftArrow}
           <View style={{ flexDirection: 'row' }}>
-            <Text style={this.style.monthText}>
+            <Text style={monthTextStyle}>
               {this.props.month.toString(this.props.monthFormat ? this.props.monthFormat : 'MMMM yyyy')}
             </Text>
             {indicator}

@@ -12,15 +12,19 @@ export default function(theme={}) {
       justifyContent: 'center',
       alignItems: 'center',
       marginTop: 8,
+      marginBottom: height * 0.005,
       height: 45
+    },
+    iOSMonthText: {
+      height: appStyle.textMonthFontSize,
+      marginTop: 2
     },
     monthText: {
       fontSize: appStyle.textMonthFontSize,
       fontFamily: appStyle.textMonthFontFamily,
       fontWeight: '600',
       color: appStyle.monthTextColor,
-      letterSpacing: -1,
-      height: appStyle.textMonthFontSize
+      letterSpacing: -1
     },
     arrow: {
       justifyContent: 'center',
