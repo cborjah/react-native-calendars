@@ -16,6 +16,7 @@ class CalendarHeader extends Component {
     firstDay: PropTypes.number,
     renderArrow: PropTypes.func,
     hideDayNames: PropTypes.bool,
+    weekNumbers: PropTypes.bool
   };
 
   constructor(props) {
@@ -41,6 +42,9 @@ class CalendarHeader extends Component {
       return true;
     }
     if (nextProps.showIndicator !== this.props.showIndicator) {
+      return true;
+    }
+    if (nextProps.hideDayNames !== this.props.hideDayNames) {
       return true;
     }
     return false;
@@ -86,7 +90,7 @@ class CalendarHeader extends Component {
         <View style={this.style.header}>
           {leftArrow}
           <View style={{ flexDirection: 'row' }}>
-            <Text style={monthTextStyle}>
+            <Text allowFontScaling={false} style={this.style.monthText}>
               {this.props.month.toString(this.props.monthFormat ? this.props.monthFormat : 'MMMM yyyy')}
             </Text>
             {indicator}
@@ -96,8 +100,9 @@ class CalendarHeader extends Component {
         {
           !this.props.hideDayNames &&
           <View style={this.style.week}>
+            {this.props.weekNumbers && <Text allowFontScaling={false} style={this.style.dayHeader}></Text>}
             {weekDaysNames.map((day, idx) => (
-              <Text key={idx} style={this.style.dayHeader} numberOfLines={1}>{day}</Text>
+              <Text allowFontScaling={false} key={idx} style={this.style.dayHeader} numberOfLines={1}>{day}</Text>
             ))}
           </View>
         }

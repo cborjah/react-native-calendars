@@ -99,6 +99,8 @@ LocaleConfig.defaultLocale = 'fr';
   firstDay={1}
   // Hide day names. Default = false
   hideDayNames={true}
+  // Show week numbers to the left. Default = false
+  showWeekNumbers={true}
 />
 ```
 
@@ -116,12 +118,15 @@ Dot marking
 <Calendar
   // Collection of dates that have to be marked. Default = {}
   markedDates={{
-    '2012-05-16': {selected: true, marked: true},
+    '2012-05-16': {selected: true, marked: true, selectedColor: 'blue'},
     '2012-05-17': {marked: true},
-    '2012-05-18': {disabled: true}
+    '2012-05-18': {marked: true, dotColor: 'red', activeOpacity: 0},
+    '2012-05-19': {disabled: true, disableTouchEvent: true}
   }}
 />
 ```
+
+You can customise a dot color for each day independently.
 
 Multi-Dot marking
 
@@ -129,7 +134,7 @@ Multi-Dot marking
  <img height=50 src="https://github.com/wix-private/wix-react-native-calendar/blob/master/demo/marking4.png?raw=true">
 </kbd>
 
-Use markingType = 'multi-dot' if you want to display more than one dot. Both the Calendar and CalendarList control support multiple dots by using 'dots' array in markedDates. The properties 'key' and 'color' are mandatory while 'selectedColor' is optional. If selectedColor is omitted then 'color' will be used for selected dates.
+Use markingType = 'multi-dot' if you want to display more than one dot. Both the Calendar and CalendarList control support multiple dots by using 'dots' array in markedDates. The property 'color' is mandatory while 'key' and 'selectedColor' are optional. If key is omitted then the array index is used as key. If selectedColor is omitted then 'color' will be used for selected dates.
 ```javascript
 const vacation = {key:'vacation', color: 'red', selectedColor: 'blue'};
 const massage = {key:'massage', color: 'blue', selectedColor: 'blue'};
@@ -238,6 +243,30 @@ theme={{
 
 **Disclaimer**: issues that arise because something breaks after using stylesheet override will not be supported. Use this option at your own risk.
 
+#### Overriding day component
+
+If you need custom functionality not supported by current day component implementations you can pass your own custom day
+component to the calendar.
+
+```javascript
+<Calendar
+  style={[styles.calendar, {height: 300}]}
+  dayComponent={({date, state}) => {
+    return (<View style={{flex: 1}}><Text style={{textAlign: 'center', color: state === 'disabled' ? 'gray' : 'black'}}>{date.day}</Text></View>);
+  }}
+/>
+```
+
+The dayComponent prop has to receive a RN component or function that receive props. The day component will receive such props:
+
+* state - disabled if the day should be disabled (this is decided by base calendar component)
+* marking - markedDates value for this day
+* date - the date object representing this day
+
+**Tip:** Don't forget to implement shouldComponentUpdate for your custom day component to make calendar perform better
+
+If you implement an awesome day component please make a PR so that other people could use it :)
+
 ### CalendarList
 
 <kbd>
@@ -256,6 +285,8 @@ theme={{
   futureScrollRange={50}
   // Enable or disable scrolling of calendar list
   scrollEnabled={true}
+  // Enable or disable vertical scroll indicator. Default = false
+  showScrollIndicator={true}
   ...calendarParams
 />
 ```
@@ -304,6 +335,8 @@ An advanced agenda component that can display interactive listings for calendar 
   renderEmptyDate={() => {return (<View />);}}
   // specify how agenda knob should look like
   renderKnob={() => {return (<View />);}}
+  // specify what should be rendered instead of ActivityIndicator
+  renderEmptyData = {() => {return (<View />);}}
   // specify your item comparison function for increased performance
   rowHasChanged={(r1, r2) => {return r1.text !== r2.text}}
   // Hide knob button. Default = false

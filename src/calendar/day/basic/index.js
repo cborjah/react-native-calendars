@@ -16,9 +16,9 @@ class Day extends Component {
 
     // Specify theme properties to override specific styles for calendar parts. Default = {}
     theme: PropTypes.object,
-    marked: PropTypes.any,
+    marking: PropTypes.any,
     onPress: PropTypes.func,
-    day: PropTypes.object,
+    date: PropTypes.object,
     firstWeek: PropTypes.bool,
     firstDay: PropTypes.bool
   };
@@ -30,11 +30,11 @@ class Day extends Component {
   }
 
   onDayPress() {
-    this.props.onPress(this.props.day);
+    this.props.onPress(this.props.date);
   }
 
   shouldComponentUpdate(nextProps) {
-    const changed = ['state', 'children', 'marked', 'onPress'].reduce((prev, next) => {
+    const changed = ['state', 'children', 'marking', 'onPress'].reduce((prev, next) => {
       if (prev) {
         return prev;
       } else if (nextProps[next] !== this.props[next]) {
@@ -42,18 +42,19 @@ class Day extends Component {
       }
       return prev;
     }, false);
-    if (changed === 'marked') {
-      let markedChanged = false;
-      if (this.props.marked && nextProps.marked) {
-        markedChanged = (!(
-          this.props.marked.marked === nextProps.marked.marked
-          && this.props.marked.selected === nextProps.marked.selected
-          && this.props.marked.disabled === nextProps.marked.disabled));
+    if (changed === 'marking') {
+      let markingChanged = false;
+      if (this.props.marking && nextProps.marking) {
+        markingChanged = (!(
+          this.props.marking.marked === nextProps.marking.marked
+          && this.props.marking.selected === nextProps.marking.selected
+          && this.props.marking.dotColor === nextProps.marking.dotColor
+          && this.props.marking.disabled === nextProps.marking.disabled));
       } else {
-        markedChanged = true;
+        markingChanged = true;
       }
-      // console.log('marked changed', markedChanged);
-      return markedChanged;
+      // console.log('marking changed', markingChanged);
+      return markingChanged;
     } else {
       // console.log('changed', changed);
       return !!changed;
@@ -65,36 +66,51 @@ class Day extends Component {
     const textStyle = [this.style.text];
     const dotStyle = [this.style.dot];
 
-    let marked = this.props.marked || {};
-    if (marked && marked.constructor === Array && marked.length) {
-      marked = {
-        marked: true
+    let marking = this.props.marking || {};
+    if (marking && marking.constructor === Array && marking.length) {
+      marking = {
+        marking: true
       };
     }
+    const isDisabled = typeof marking.disabled !== 'undefined' ? marking.disabled : this.props.state === 'disabled';
     let dot;
-    if (marked.marked) {
+    if (marking.marked) {
       dotStyle.push(this.style.visibleDot);
+      if (marking.dotColor) {
+        dotStyle.push({backgroundColor: marking.dotColor});
+      }
       dot = (<View style={dotStyle}/>);
     }
 
-    if (marked.selected) {
+    if (marking.selected) {
       containerStyle.push(this.style.selected);
+      if (marking.selectedColor) {
+        containerStyle.push({backgroundColor: marking.selectedColor});
+      }
       dotStyle.push(this.style.selectedDot);
       textStyle.push(this.style.selectedText);
-    } else if (typeof marked.disabled !== 'undefined' ? marked.disabled : this.props.state === 'disabled') {
+    } else if (isDisabled) {
       textStyle.push(this.style.disabledText);
     } else if (this.props.state === 'today') {
       textStyle.push(this.style.todayText);
     }
+<<<<<<< HEAD
     if (Platform.OS === 'android') textStyle.push(this.style.androidText);
     else textStyle.push(this.style.iOSText);
 
     if (this.props.firstWeek) containerStyle.push(this.style.firstWeek);
     if (this.props.firstDay) containerStyle.push(this.style.firstDay);
+=======
+>>>>>>> c23c53c0c44945ad02d8dbfc98ebdecc8268e74e
 
     return (
-      <TouchableOpacity style={containerStyle} onPress={this.onDayPress}>
-        <Text style={textStyle}>{String(this.props.children)}</Text>
+      <TouchableOpacity
+        style={containerStyle}
+        onPress={this.onDayPress}
+        activeOpacity={marking.activeOpacity}
+        disabled={marking.disableTouchEvent}
+      >
+        <Text allowFontScaling={false} style={textStyle}>{String(this.props.children)}</Text>
         {dot}
       </TouchableOpacity>
     );

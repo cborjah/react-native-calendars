@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {
   View,
-  ViewPropTypes,
+  ViewPropTypes
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -56,14 +56,18 @@ class Calendar extends Component {
     onVisibleMonthsChange: PropTypes.func,
     // Replace default arrows with custom ones (direction can be 'left' or 'right')
     renderArrow: PropTypes.func,
+    // Provide custom day rendering component
+    dayComponent: PropTypes.any,
     // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
     monthFormat: PropTypes.string,
     // Disables changing month when click on days of other months (when hideExtraDays is false). Default = false
     disableMonthChange: PropTypes.bool,
-    //Hide day names. Default = false
+    //  Hide day names. Default = false
     hideDayNames: PropTypes.bool,
-    //Disable days by default. Default = false
-    disabledByDefault: PropTypes.bool
+    // Disable days by default. Default = false
+    disabledByDefault: PropTypes.bool,
+    // Show week numbers. Default = false
+    showWeekNumbers: PropTypes.bool,
   };
 
   constructor(props) {
@@ -113,7 +117,8 @@ class Calendar extends Component {
     });
   }
 
-  pressDay(day) {
+  pressDay(date) {
+    const day = parseDate(date);
     const minDate = parseDate(this.props.minDate);
     const maxDate = parseDate(this.props.maxDate);
     if (!(minDate && !dateutils.isGTE(day, minDate)) && !(maxDate && !dateutils.isLTE(day, maxDate))) {
@@ -153,18 +158,19 @@ class Calendar extends Component {
       }
     } else {
       const DayComp = this.getDayComponent();
+      const date = day.getDate();
       dayComp = (
         <DayComp
           key={id}
           state={state}
           theme={this.props.theme}
           onPress={this.pressDay}
-          day={day}
-          marked={this.getDateMarking(day)}
+          date={xdateToData(day)}
+          marking={this.getDateMarking(day)}
           firstWeek={firstWeek}
           firstDay={firstDay}
         >
-          {day.getDate()}
+          {date}
         </DayComp>
       );
     }
@@ -172,6 +178,10 @@ class Calendar extends Component {
   }
 
   getDayComponent() {
+    if (this.props.dayComponent) {
+      return this.props.dayComponent;
+    }
+
     switch (this.props.markingType) {
     case 'period':
       return UnitDay;
@@ -194,6 +204,10 @@ class Calendar extends Component {
     }
   }
 
+  renderWeekNumber (weekNumber) {
+    return <Day key={`week-${weekNumber}`} theme={this.props.theme} state='disabled'>{weekNumber}</Day>;
+  }
+
   renderWeek(days, id) {
     const week = [];
     days.forEach((day, id2) => {
@@ -205,6 +219,11 @@ class Calendar extends Component {
 
       week.push(this.renderDay(day, id2, firstWeek, firstDay));
     }, this);
+
+    if (this.props.showWeekNumbers) {
+      week.unshift(this.renderWeekNumber(days[days.length - 1].getWeek()));
+    }
+
     return (<View style={this.style.week} key={id}>{week}</View>);
   }
 
@@ -235,6 +254,7 @@ class Calendar extends Component {
           renderArrow={this.props.renderArrow}
           monthFormat={this.props.monthFormat}
           hideDayNames={this.props.hideDayNames}
+          weekNumbers={this.props.showWeekNumbers}
         />
         {weeks}
       </View>);
