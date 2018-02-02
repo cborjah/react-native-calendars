@@ -94,14 +94,12 @@ class Day extends Component {
     } else if (this.props.state === 'today') {
       textStyle.push(this.style.todayText);
     }
-<<<<<<< HEAD
+    
     if (Platform.OS === 'android') textStyle.push(this.style.androidText);
     else textStyle.push(this.style.iOSText);
 
     if (this.props.firstWeek) containerStyle.push(this.style.firstWeek);
     if (this.props.firstDay) containerStyle.push(this.style.firstDay);
-=======
->>>>>>> c23c53c0c44945ad02d8dbfc98ebdecc8268e74e
 
     return (
       <TouchableOpacity
